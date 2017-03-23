@@ -178,11 +178,13 @@ define oradb::installem_agent(
       file { "${download_dir}/em_agent.properties":
         ensure  => present,
         content => epp('oradb/em_agent_pull.properties.epp', {
-                        'agent_instance_home_dir' => $agent_instance_home_dir,
-                        'oms_host'                => $oms_host,
-                        'oms_port'                => $oms_port,
-                        'agent_port'              => $agent_port,
-                        'em_upload_port'          => $em_upload_port } ),
+                        'agent_instance_home_dir'     => $agent_instance_home_dir,
+                        'oms_host'                    => $oms_host,
+                        'oms_port'                    => $oms_port,
+                        'agent_port'                  => $agent_port,
+                        'em_upload_port'              => $em_upload_port,
+                        'agent_registration_password' => $agent_registration_password,
+                        'agent_base_dir'              => $agent_base_dir }),
         mode    => '0755',
         owner   => $user,
         group   => $group,
@@ -205,8 +207,14 @@ define oradb::installem_agent(
                       Oradb::Utils::Dborainst["em agent orainst ${version}"],],
       }
 
+      if ($version in ['13.2.0.0']) {
+        $after_command = "${agent_base_dir}/agent_${install_version}/root.sh"
+      } else {
+        $after_command = "${agent_base_dir}/core/${install_version}/root.sh"
+      }
+
       exec { "run em agent root.sh script ${title}":
-        command   => "${agent_base_dir}/core/${install_version}/root.sh",
+        command   => $after_command,
         user      => 'root',
         group     => 'root',
         path      => $exec_path,
@@ -252,8 +260,14 @@ define oradb::installem_agent(
                       Oradb::Utils::Dborainst["em agent orainst ${version}"],],
       }
 
+      if ($version in ['13.2.0.0']) {
+        $after_command = "${agent_base_dir}/agent_${install_version}/root.sh"
+      } else {
+        $after_command = "${agent_base_dir}/core/${install_version}/root.sh"
+      }
+
       exec { "run em agent root.sh script ${title}":
-        command   => "${agent_base_dir}/core/${install_version}/root.sh",
+        command   => $after_command,
         user      => 'root',
         group     => 'root',
         path      => $exec_path,

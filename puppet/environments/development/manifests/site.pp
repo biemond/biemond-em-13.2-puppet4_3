@@ -66,7 +66,7 @@ class oraem_install {
   require oraem_os
 
   oradb::installem{ 'em13200':
-    version                     => '13.2.0.0',
+    version                     => '13.2.0.0.0',
     file                        => 'em13200p1_linux64',
     oracle_base_dir             => '/oracle',
     oracle_home_dir             => '/oracle/product/13.2/em',

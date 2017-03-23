@@ -357,24 +357,27 @@ define oradb::installem(
                     File["${download_dir}/em_install_static_${version}.ini"],],
     }
 
-    exec { "run root.sh script ${title}":
-      command   => "${oracle_home_dir}/oms/allroot.sh",
-      user      => 'root',
-      group     => 'root',
-      path      => $exec_path,
-      cwd       => $oracle_base_dir,
-      logoutput => $log_output,
-      require   => Exec["install oracle em ${title}"],
-    }
+    if ( $version in ['12.1.0.4', '12.1.0.5']) {
+      exec { "run root.sh script ${title}":
+        command   => "${oracle_home_dir}/oms/allroot.sh",
+        user      => 'root',
+        group     => 'root',
+        path      => $exec_path,
+        cwd       => $oracle_base_dir,
+        logoutput => $log_output,
+        require   => Exec["install oracle em ${title}"],
+      }
 
-    file { $oracle_home_dir:
-      ensure  => directory,
-      recurse => false,
-      replace => false,
-      mode    => '0775',
-      owner   => $user,
-      group   => $group,
-      require => Exec["install oracle em ${title}","run root.sh script ${title}"],
+
+      file { $oracle_home_dir:
+        ensure  => directory,
+        recurse => false,
+        replace => false,
+        mode    => '0775',
+        owner   => $user,
+        group   => $group,
+        require => Exec["install oracle em ${title}","run root.sh script ${title}"],
+      }
     }
 
     # cleanup
@@ -385,8 +388,7 @@ define oradb::installem(
           user    => 'root',
           group   => 'root',
           path    => $exec_path,
-          require => [Exec["install oracle em ${title}"],
-                      Exec["run root.sh script ${title}"],],
+          require => Exec["install oracle em ${title}"],
         }
       }
 

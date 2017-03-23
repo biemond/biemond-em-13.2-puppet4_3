@@ -1314,6 +1314,29 @@ or
       oracle_hostname             => 'emdb.example.com', # FQDN hostname where to install on
     }
 
+    oradb::installem_agent{ 'em13200_agent':
+      version                     => '13.2.0.0',
+      source                      => 'https://10.10.10.25:7799/em/install/getAgentImage',
+      install_type                => 'agentPull',
+      install_platform            => 'Linux x86-64',
+      install_version             => '13.2.0.0.0',
+      oracle_base_dir             => '/oracle',
+      agent_base_dir              => '/oracle/product/13.2/agent',
+      agent_instance_home_dir     => '/oracle/product/13.2/agent/agent_inst',
+      sysman_user                 => 'sysman',
+      sysman_password             => 'Welcome01',
+      agent_registration_password => 'Welcome01',
+      agent_port                  => 1830,
+      oms_host                    => '10.10.10.25',
+      oms_port                    => 7799,
+      em_upload_port              => 4889,
+      oracle_hostname             => 'emdb.example.com',
+      user                        => 'oracle',
+      group                       => 'dba',
+      download_dir                => '/var/tmp/install',
+      log_output                  => true,
+    }
+
     oradb::installem_agent{ 'em12104_agent2':
       version                     => '12.1.0.4',
       source                      => '/var/tmp/install/agent.zip',
