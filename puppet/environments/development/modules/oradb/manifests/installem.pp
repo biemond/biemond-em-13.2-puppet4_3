@@ -238,8 +238,7 @@ define oradb::installem(
           group   => $group,
           require => File["${download_dir}/${file6}"]
         }
-      }  
-
+      }
       $source = $download_dir
     } else {
       $source = $mount_point
@@ -443,7 +442,7 @@ define oradb::installem(
             path    => $exec_path,
             require => Exec["install oracle em ${title}"],
           }
-        }  
+        }
       }
     }
   }

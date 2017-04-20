@@ -1,7 +1,15 @@
 # Version updates
+## 3.0.8
+- 12.2 db rsp template had a listener error
+
+## 3.0.7
+- database.pp now also use init_params for dbt templates
+- database.pp set sid with db_name on dbt templates
+- database.pp changed template_variables for dbt templates to a hash
 
 ## 3.0.6
-- Support Enterrpise manager 13.2.0.0
+- Support Enterpise manager 13.2.0.0
+- Support EM agent 13.2.0.0
 
 ## 3.0.5
 - opatch upgrade fix, emocmrsp is not necessary when version >= 12.2.0.1.5
