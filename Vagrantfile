@@ -9,8 +9,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "emdb" , primary: true do |emdb|
 
-    emdb.vm.box = "centos-7-1611-x86_64"
-    emdb.vm.box_url = "https://dl.dropboxusercontent.com/s/filvjntyct1wuxe/centos-7-1611-x86_64.box"
+    emdb.vm.box = "centos-7-1708-x86_64"
+    emdb.vm.box_url = "https://dl.dropboxusercontent.com/s/7dr5ewj4mvohynu/centos-7-1708-x86_64.box"
 
     emdb.vm.provider :vmware_fusion do |v, override|
       override.vm.box = "centos-7-1611-x86_64-vmware"
@@ -61,8 +61,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "emapp" , primary: true do |emapp|
 
-    emapp.vm.box = "centos-7-1611-x86_64"
-    emapp.vm.box_url = "https://dl.dropboxusercontent.com/s/filvjntyct1wuxe/centos-7-1611-x86_64.box"
+    emapp.vm.box = "centos-7-1708-x86_64"
+    emapp.vm.box_url = "https://dl.dropboxusercontent.com/s/7dr5ewj4mvohynu/centos-7-1708-x86_64.box"
 
     emapp.vm.provider :vmware_fusion do |v, override|
       override.vm.box = "centos-7-1611-x86_64-vmware"

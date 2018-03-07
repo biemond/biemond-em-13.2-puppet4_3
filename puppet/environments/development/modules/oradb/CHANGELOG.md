@@ -1,4 +1,44 @@
 # Version updates
+## 3.0.16
+- fix database.pp change parameter storage_type to optional, to use template file without parameter -datafileDestination (issue #197)
+
+## 3.0.15
+- fix autostart and removed the hard dbora reference
+
+## 3.0.14
+- database.pp & data_file_destination went wrong with dbt templates
+- fix dbt templates for memory_total param
+- Allow 'SE2', 'HP', 'XP', 'PE' as 12.2 database type
+
+## 3.0.13
+- opatchupgrade now also has remote_file parameter
+- opatchupgrade fix error when supportid is supplied
+- database.pp check if data_file_destination is provided with a template
+
+## 3.0.12
+- db_domain is optional again on database.pp
+- opatchupgrade, fixed the version check for doing emocmrsp or not
+
+## 3.0.11
+- installdb new groups options like group_backup, group_dg ,group_km ,group_rac
+- remove the container restriction on 12.2
+- added LDAP to netca
+- cleanup on installdb works now for only 1 install binary
+- allow the creation of grid home & base on installasm
+- fix installasm 12.2 issue with CRS_SWONLY 
+
+
+## 3.0.10
+- fix opatch for normal patches
+- fix opatch success check for grid
+
+## 3.0.9
+- fix database own dbttemplate issue with double -variablesFile error
+- 12.2 db requires always container database = true
+- chown fix on directories without -R
+- opatch facts fix
+- added extra stop & start in dbora_Linux startup script
+
 ## 3.0.8
 - 12.2 db rsp template had a listener error
 
