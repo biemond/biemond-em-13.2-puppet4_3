@@ -337,10 +337,11 @@ define oradb::installem(
       }
     }
 
+    # unset the proxy to make sure em can connect to db even the VMs are behind a proxy
     if ( $version in ['12.1.0.4', '12.1.0.5']) {
-      $command = "/bin/su - ${user} -c 'unset DISPLAY;${download_dir}/${file}/runInstaller -silent -waitforcompletion -ignoreSysPrereqs -ignorePrereq -responseFile ${download_dir}/em_install_${version}.rsp'"
+      $command = "/bin/su - ${user} -c 'unset DISPLAY;unset http_proxy;unset https_proxy;${download_dir}/${file}/runInstaller -silent -waitforcompletion -ignoreSysPrereqs -ignorePrereq -responseFile ${download_dir}/em_install_${version}.rsp'"
     } elsif ($version in ['13.2.0.0']) {
-      $command = "/bin/su - ${user} -c 'unset DISPLAY;${source}/${file1} -J-Djava.io.tmpdir=${temp_dir} -silent -waitforcompletion -ignoreSysPrereqs -ignorePrereq -responseFile ${download_dir}/em_install_${version}.rsp'"
+      $command = "/bin/su - ${user} -c 'unset DISPLAY;unset http_proxy;unset https_proxy;${source}/${file1} -J-Djava.io.tmpdir=${temp_dir} -silent -waitforcompletion -ignoreSysPrereqs -ignorePrereq -responseFile ${download_dir}/em_install_${version}.rsp'"
     }
 
     exec { "install oracle em ${title}":

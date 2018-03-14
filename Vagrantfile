@@ -6,6 +6,12 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+#  if Vagrant.has_plugin?("vagrant-proxyconf")
+#      config.proxy.http     = "http://<your proxy server>:<port>/"
+#      config.proxy.https    = "https://<your proxy server>:<port>/"
+#      config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+#  end
+
 
   config.vm.define "emdb" , primary: true do |emdb|
 
@@ -74,6 +80,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     emapp.vm.synced_folder "/Users/edwinbiemond/software", "/software"
 
     emapp.vm.network :private_network, ip: "10.10.10.25"
+    
+    emapp.vm.network :forwarded_port, guest: 7799, host: 7799
+    emapp.vm.network :forwarded_port, guest: 7101, host: 7101
+    emapp.vm.network :forwarded_port, guest: 9801, host: 9801
 
     emapp.vm.provider :vmware_fusion do |vb|
       vb.vmx["numvcpus"] = "2"
@@ -97,7 +107,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifests_path       = "puppet/environments/development/manifests"
       puppet.manifest_file        = "site.pp"
 
-      puppet.options           = "--verbose --detailed-exitcodes --report --trace --hiera_config /vagrant/puppet/environments/development/hiera.yaml"
+      puppet.options           = "--verbose --debug --detailed-exitcodes --report --trace --hiera_config /vagrant/puppet/environments/development/hiera.yaml"
 
       puppet.facter = {
         "environment" => "development",

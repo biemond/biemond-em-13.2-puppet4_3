@@ -6,11 +6,12 @@ node 'emapp.example.com'  {
 # operating settings for Database & Middleware
 class oraem_os {
 
-  swap_file::files { 'swap_file':
-    ensure       => present,
-    swapfilesize => '8 GB',
-    swapfile     => '/data/swap.1' 
-  }
+# will not work with a VM with FS as btrfs 
+#  swap_file::files { 'swap_file':
+#    ensure       => present,
+#    swapfilesize => '8 GB',
+#    swapfile     => '/data/swap.1' 
+#  }
 
   $host_instances = hiera('hosts', {})
   create_resources('host',$host_instances)
