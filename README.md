@@ -8,6 +8,15 @@
 
 ### Vagrant
 Update the local path of the /software share in Vagrantfile to your own DB & EM software location
+If you are behind a proxy, then make sure you have install the vagrant plugin: vagrant-proxyconf; 
+and then uncomment the follwing proxy setup according your proxy setting in the Vagrantfile:
+````
+#  if Vagrant.has_plugin?("vagrant-proxyconf")
+#      config.proxy.http     = "http://<your proxy server>:<port>/"
+#      config.proxy.https    = "https://<your proxy server>:<port>/"
+#      config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+#  end
+````
 
 ### EM DB steps
 - vagrant up emdb
@@ -16,8 +25,12 @@ Update the local path of the /software share in Vagrantfile to your own DB & EM 
 - vagrant up emapp
 
 ### default urls
-- Enterprise Manager Cloud Control URL: https://10.10.10.25:7799/em
-- Admin Server URL: https://10.10.10.25:7102/console
+- Enterprise Manager Cloud Control URL: https://localhost:7799/em or https://10.10.10.25:7799/em
+  (with user sysman)
+- Admin Server URL: https://localhost:7101/console or https://10.10.10.25:7101/console
+  (with user weblogic)
+- BI Publisher URL: https://localhost:9801/xmlpserver or https://10.10.10.25:9801/xmlpserver
+  (with user weblogic)
 
 ````
 this information is also available at:

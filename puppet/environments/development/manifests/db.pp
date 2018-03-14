@@ -8,11 +8,12 @@ node 'emdb.example.com'  {
 # operating settings for Database & Middleware
 class oradb_os {
 
-  swap_file::files { 'swap_file':
-    ensure       => present,
-    swapfilesize => '8 GB',
-    swapfile     => '/data/swap.1' 
-  }
+# will not work with a VM with FS as btrfs 
+#  swap_file::files { 'swap_file':
+#    ensure       => present,
+#    swapfilesize => '8 GB',
+#    swapfile     => '/data/swap.1' 
+#  }
 
   # set the tmpfs
   mount { '/dev/shm':
